@@ -4,12 +4,40 @@
       <h1>whisp.</h1>
     </router-link>
     <div class="btns">
-      <button>
+      <button @click="signIn">
         <fa icon="user" />
       </button>
     </div>
   </header>
 </template>
+
+<script>
+import firebase from 'firebase'
+
+import { auth } from '../main'
+export default {
+    methods: {
+        signIn() {
+            const provider = new firebase.auth.GoogleAuthProvider()
+            auth.signInWithPopup(provider)
+            .then((result) => {
+                alert('Hello, ' +result.user.displayName+'!')
+            })
+        },
+        signOut() {
+            if(window.confirm('Are You Sure to Sign Out?')) {
+                auth.signOut()
+                .then(() => {
+                    alert('You Safely Signed Out.')
+                    this.$router.push('/'),
+                    location.reload()
+                })
+                // リロードの設定は、必ずしも必要ではありませんが、サインアウト後、稀に正常にページが表示されなくなることがあるので、そのための対策として入れています。
+            }
+        }
+    }
+}
+</script>
 
 <style lang="stylus" scoped>
 header

@@ -84,7 +84,7 @@ export default {
       width: 100%;
     }
   }
-  
+
   &__button {
     width: 100%;
     background-color: red;

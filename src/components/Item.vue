@@ -17,8 +17,8 @@
       <fa icon="ellipsis-v" />
     </button>
     <div v-if="showBtns" class="controls">
-      <li @click="deleteWhisper" style="color: red">delete</li>
-      <li @click="editing = !editing">edit</li>
+      <li @click="deleteWhisper" style="color: red">消去する</li>
+      <li @click="editing = !editing">編集する</li>
     </div>
   </li>
 </template>
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     deleteWhisper() {
-      if (window.confirm("Are You Sure to Delete This Whisper?")) {
+      if (window.confirm("消去しても良いですか?")) {
         db.collection("whispers")
           .doc(this.$props.id)
           .delete();
@@ -79,7 +79,7 @@ export default {
 .item {
   list-style: none;
   border-top: 1px solid #eee;
-  padding: 5px 15px;
+  padding: 15px 15px;
   display: flex;
   flex-wrap: no-wrap;
   justify-content: flex-start;

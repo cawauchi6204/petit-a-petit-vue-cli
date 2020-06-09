@@ -5,7 +5,7 @@
     </router-link>
     <div v-if="currentUser" class="btns">
       <router-link :to="'/user/'+currentUser.uid">
-      <button :style="'background-image:url('+currentUser.photoURL+')'"></button>
+        <button :style="'background-image:url('+currentUser.photoURL+')'"></button>
       </router-link>
       <button>
         <fa icon="sign-out-alt" @click="signOut" />
@@ -31,11 +31,9 @@ export default {
       const provider = new firebase.auth.GoogleAuthProvider();
       auth.signInWithPopup(provider).then(result => {
         this.$router.push("/user/" + result.user.uid);
-        alert("Hello, " + result.user.displayName + "!");
+        alert("Bonjour " + result.user.displayName + "さん!");
 
         this.createUser(result.user);
-        alert(result);
-        console.log(result);
       });
     },
     createUser(user) {
@@ -51,9 +49,9 @@ export default {
         );
     },
     signOut() {
-      if (window.confirm("Are You Sure to Sign Out?")) {
+      if (window.confirm("サインアウトしてもいいですか?")) {
         auth.signOut().then(() => {
-          alert("You Safely Signed Out.");
+          alert("安全にサインアウトされました");
           this.$router.push("/");
         });
       }
@@ -77,21 +75,23 @@ export default {
 header {
   position: fixed;
   top: 0;
+  z-index: 1;
   width: 100%;
   text-align: center;
   padding: 10px;
+  background-color: white;
+  display: flex;
 
   h1 {
     width: fit-content;
-    margin: 0 auto;
+    margin-right: auto;
     font-size: 1.4rem;
   }
 
   .btns {
-    position: absolute;
-    top: 10px;
-    right: 30px;
     cursor: pointer;
+    margin-left: auto;
+    margin-right: 30px;
 
     img {
       width: 100%;

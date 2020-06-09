@@ -33,6 +33,8 @@ firebase.initializeApp({
   measurementId: "G-E2VXCW9KWL"
 })
 
+firebase.analytics();
+
 export const db = firebase.firestore()
 export const auth = firebase.auth()
 

@@ -28,9 +28,9 @@ body
   text-decoration none
   color inherit
 main
-  margin 80px auto 0
-  width 95%
-  max-width 600px
+  margin 0 auto 0
+  width 100%
+  max-width 100%
 .btns
   display flex
   flex-wrap nowrap

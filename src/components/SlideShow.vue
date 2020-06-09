@@ -2,8 +2,7 @@
   <div class="hooper-sample">
     <hooper class="hooper-sample__hooper" :settings="hooperSettings" @slide="slide">
       <slide class="hooper-sample__slide">
-        Hooperを
-        <br />使って
+        <img src="../assets/img/ikeike.jpg" alt />
       </slide>
       <slide class="hooper-sample__slide">
         簡単に
@@ -14,10 +13,10 @@
         最後のスライドは
         <br />ボタンだけを表示する
       </slide>
-      <hooper-pagination slot="hooper-addons" v-if="!isLastSlide" />
-      <hooper-navigation slot="hooper-addons" v-if="!isLastSlide" />
+      <hooper-pagination slot="hooper-addons" />
+      <hooper-navigation slot="hooper-addons" />
     </hooper>
-    <button v-if="isLastSlide" class="hopper-sample__button">ボタン</button>
+    <button v-show="isLastSlide" class="hopper-sample__button">ボタン</button>
   </div>
 </template>
 
@@ -43,7 +42,8 @@ export default {
       hooperSettings: {
         itemsToShow: 1,
         centerMode: true,
-        wheelControl: false
+        wheelControl: false,
+        keysControl: true
       },
       currentSlide: 0
     };
@@ -61,18 +61,33 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .hooper-sample {
   background-color: #d5d5d5;
   text-align: center;
 
   &__hooper {
+    height: 95vh;
+  }
+
+  @media screen and (max-width: 1200px) {
+    &__hooper {
+      height: auto;
+    }
   }
 
   &__slide {
     display: flex;
     justify-content: center;
     align-items: center;
+    img {
+      width: 100%;
+    }
+  }
+  
+  &__button {
+    width: 100%;
+    background-color: red;
   }
 }
 </style>

@@ -22,6 +22,9 @@ import 'firebase/firestore'
 
 Vue.use(firestorePlugin)
 
+import { Hooper, Slide } from 'hooper';
+import 'hooper/dist/hooper.css';
+
 firebase.initializeApp({
   apiKey: "AIzaSyBDcrFz8STQvnxZ1sQ9nCYwEG9DJAYxtls",
   authDomain: "ptit-a-ptit.firebaseapp.com",
@@ -44,6 +47,8 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
+  Hooper,
+  Slide,
   render: function (h) {
     return h(App);
   }

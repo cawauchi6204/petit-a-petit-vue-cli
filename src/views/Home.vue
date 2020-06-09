@@ -36,5 +36,3 @@ export default {
   mixins: [Vue2Filters.mixin]
 };
 </script>
-
-<style lang="stylus" scoped></style>

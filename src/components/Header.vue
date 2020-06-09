@@ -1,7 +1,7 @@
 <template>
   <header>
     <router-link to="/">
-      <h1>whisp.</h1>
+      <h1>Petit a Petit</h1>
     </router-link>
     <div v-if="currentUser" class="btns">
       <router-link :to="'/user/'+currentUser.uid">

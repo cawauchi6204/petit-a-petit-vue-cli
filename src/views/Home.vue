@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <SlideShow />
     <div class="list">
       <Item
         v-for="whisper in orderBy(whispers,'date',-1)"
@@ -14,6 +15,7 @@
 <script>
 // @ is an alias to /src
 import Item from '../components/Item'
+import SlideShow from '../components/SlideShow'
 
 import { db } from "../main";
 import Vue2Filters from "vue2-filters";
@@ -21,7 +23,8 @@ import Vue2Filters from "vue2-filters";
 export default {
   name: "Home",
   components: {
-    Item
+    Item,
+    SlideShow
   },
   data() {
     return {

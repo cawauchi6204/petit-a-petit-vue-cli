@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import User from '../views/User.vue';
 import Lesson from '../views/Lesson.vue';
 import NotFound from '../views/NotFound.vue';
+// import firebase from 'firebase'
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,39 @@ const routes = [
     component: NotFound
   }
 ];
+
+// router.beforeResolve((to, from, next) => {
+//   const funcLoginAuthentication = firebase.functions().httpsCallable('funcLoginAuthentication')
+
+//   funcLoginAuthentication()
+//     .then(res => {
+//       const user = res.data
+//       // Googleログインしている場合
+//       if (user.isLogin) {
+//         // xxxxx.comドメインの場合
+//         if (to.name === 'auth/login') {
+//           next({ name: 'home' })
+//         } else {
+//           next()
+//         }
+//       } else {
+//         // xxxxx.comドメイン以外の場合
+//         if (to.name === 'auth/error') {
+//           next()
+//         } else {
+//           next({ name: 'auth/error' })
+//         }
+//       }
+//     })
+//     .catch(() => {
+//       // Googleログインしていない場合
+//       if (to.name === 'auth/login') {
+//         next()
+//       } else {
+//         next({ name: 'auth/login' })
+//       }
+//     })
+// })
 
 const router = new VueRouter({
   mode: "history",

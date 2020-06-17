@@ -1,6 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
+import Vuetify from "vuetify";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
@@ -21,6 +22,7 @@ import firebase from 'firebase'
 import 'firebase/firestore'
 
 Vue.use(firestorePlugin)
+Vue.use(Vuetify)
 
 import { Hooper, Slide } from 'hooper';
 import 'hooper/dist/hooper.css';

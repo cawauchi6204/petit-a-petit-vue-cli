@@ -1,6 +1,8 @@
 <template>
   <div id="user">
     <SlideShow />
+    <button @click="getImg">getImg</button>
+    <input type="file" @change="attachImage">
     <div class="user-title">
       <div class="avatar" :style="'background-image: url('+user.photoURL+')'"></div>
       <div class="texts">
@@ -24,6 +26,7 @@
 <script>
 import { auth } from "../main";
 import { db } from "../main";
+import { storage } from "../main";
 // import firebase from "firebase";
 import Vue2Filters from "vue2-filters";
 import Item from "@/components/Item";
@@ -42,6 +45,39 @@ export default {
       myWhispers: [],
       currentUser: {}
     };
+  },
+  methods: {
+    getImg() {
+      console.log(storage.ref().child("image/kyuri.jpg"));
+    },
+    upImg() {
+      const storageRef = storage.ref();
+
+      const downRef = storageRef.child("images/kyuri.jpg");
+      console.log(downRef);
+    },
+    attachImage(e) {
+      const file = e.target.files[0];
+      const storageRef = storage.ref();
+
+      const uploadTask = storageRef.child(`images/${file.name}`).put(file);
+      uploadTask.on(
+        "state_changed",
+        snapshot => {
+          console.log("snapshot", snapshot);
+        },
+        error => {
+          console.log("err", error);
+        },
+        () => {
+          // Handle successful uploads on complete
+          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+          uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+            console.log("File available at", downloadURL);
+          });
+        }
+      );
+    },
   },
   firestore() {
     return {

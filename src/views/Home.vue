@@ -9,7 +9,12 @@
         :uid="whisper.uid"
       />
     </div>
-    <Card />
+    <div class="cards">
+      <router-link to="/lesson/lesson"><Card /></router-link>
+      <router-link to="/lesson/lesson"><Card /></router-link>
+      <router-link to="/lesson/lesson"><Card /></router-link>
+      <router-link to="/lesson/lesson"><Card /></router-link>
+    </div>
   </div>
 </template>
 
@@ -42,3 +47,10 @@ export default {
   mixins: [Vue2Filters.mixin]
 };
 </script>
+
+<style>
+  .cards {
+    display:flex;
+    flex-wrap: wrap;
+  }
+</style>

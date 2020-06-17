@@ -1,18 +1,17 @@
 <template>
-  <div id="user">
+  <div id="lesson">
     <SlideShow />
-    <button @click="getImg">getImg</button>
-    <input type="file" @change="attachImage">
-    <div class="user-title">
-      <div class="avatar" :style="'background-image: url('+user.photoURL+')'"></div>
+    <ImageUpload />
+    <div class="lesson-title">
+      <div class="avatar" :style="'background-image: url('+lesson.photoURL+')'"></div>
       <div class="texts">
-        <h1>{{user.name}}</h1>
+        <h1>{{lesson.name}}</h1>
         <p v-if="myWhispers.length > 1">{{myWhispers.length}} whispers</p>
         <p v-else>{{myWhispers.length}} whisper</p>
       </div>
     </div>
     <div class="list">
-      <Editor :currentUser="currentUser" />
+      <Editor :currentLesson="currentLesson" />
       <Item
         v-for="whisper in orderBy(myWhispers,'date',-1)"
         :key="whisper.id"
@@ -32,18 +31,20 @@ import Vue2Filters from "vue2-filters";
 import Item from "@/components/Item";
 import Editor from "../components/Editor";
 import SlideShow from "../components/SlideShow";
+import ImageUpload from '../components/ImageUpload';
 
 export default {
   components: {
     Item,
     Editor,
-    SlideShow
+    SlideShow,
+    ImageUpload
   },
   data() {
     return {
-      user: {},
+      lesson: {},
       myWhispers: [],
-      currentUser: {}
+      currentlesson: {}
     };
   },
   methods: {
@@ -60,7 +61,7 @@ export default {
       const file = e.target.files[0];
       const storageRef = storage.ref();
 
-      const uploadTask = storageRef.child(`images/${file.name}`).put(file);
+      const uploadTask = storageRef.child(`${file.name}`).put(file);
       uploadTask.on(
         "state_changed",
         snapshot => {
@@ -81,15 +82,15 @@ export default {
   },
   firestore() {
     return {
-      user: db.collection("users").doc(this.$route.params.uid),
+      lesson: db.collection("lessons").doc(this.$route.params.uid),
       myWhispers: db
         .collection("whispers")
         .where("uid", "==", this.$route.params.uid)
     };
   },
   created() {
-    auth.onAuthStateChanged(user => {
-      this.currentUser = user;
+    auth.onAuthStateChanged(lesson => {
+      this.currentlesson = lesson;
     });
   },
   mixins: [Vue2Filters.mixin]
@@ -97,7 +98,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.user-title {
+.lesson-title {
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-start;
